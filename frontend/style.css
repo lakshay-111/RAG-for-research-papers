@@ -1,0 +1,408 @@
+:root {
+    --bg-color: #FAFAFA;
+    --text-color: #1A1A1A;
+    --glass-bg: rgba(255, 255, 255, 0.65);
+    --glass-border: rgba(26, 26, 26, 0.08);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Glassmorphism utility */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 16px;
+}
+
+/* Header */
+header {
+    width: 100%;
+    padding: 20px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: rgba(250, 250, 250, 0.8);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Main Layout */
+.container {
+    display: flex;
+    gap: 30px;
+    padding: 30px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    flex: 1;
+}
+
+/* Sidebar Options */
+.options-panel {
+    flex: 0 0 350px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 90px;
+}
+
+.tabs {
+    display: flex;
+    background: rgba(26, 26, 26, 0.05);
+    border-radius: 12px;
+    padding: 4px;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.tab.active {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.hidden {
+    display: none !important;
+}
+
+h3 {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.5);
+    outline: none;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, select:focus {
+    border-color: var(--text-color);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* File Drop Area */
+.file-drop-area {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 30px;
+    border: 2px dashed rgba(26, 26, 26, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.file-drop-area:hover, .file-drop-area.dragover {
+    border-color: var(--text-color);
+    background: rgba(26, 26, 26, 0.03);
+}
+
+.file-drop-area input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-msg {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.file-list {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--glass-border);
+    margin: 10px 0;
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.primary-btn {
+    background: var(--text-color);
+    color: var(--bg-color);
+    width: 100%;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(26, 26, 26, 0.2);
+}
+
+.primary-btn:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.icon-btn {
+    background: rgba(26, 26, 26, 0.05);
+    color: var(--text-color);
+    padding: 12px;
+}
+.icon-btn:hover {
+    background: rgba(26, 26, 26, 0.1);
+}
+
+/* Status Msg */
+.status-msg {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-top: 10px;
+    text-align: center;
+    min-height: 20px;
+}
+
+/* Chat Area */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: calc(100vh - 120px);
+}
+
+.chat-box {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-right: 10px;
+}
+
+/* Custom Scrollbar */
+.chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+.chat-box::-webkit-scrollbar-thumb {
+    background: rgba(26, 26, 26, 0.2);
+    border-radius: 10px;
+}
+
+.message {
+    padding: 16px 20px;
+    max-width: 85%;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.message.user {
+    align-self: flex-end;
+    background: var(--text-color);
+    color: var(--bg-color);
+    border-radius: 16px 16px 0 16px;
+    box-shadow: 0 4px 15px rgba(26, 26, 26, 0.15);
+}
+
+.message.system {
+    align-self: center;
+    font-size: 0.85rem;
+    opacity: 0.8;
+    padding: 10px 20px;
+    border-radius: 20px;
+    max-width: fit-content;
+}
+
+.message.assistant {
+    align-self: flex-start;
+    border-radius: 16px 16px 16px 0;
+}
+
+/* Markdown styling in assistant messages */
+.message.assistant p { margin-bottom: 10px; }
+.message.assistant p:last-child { margin-bottom: 0; }
+.message.assistant h1, .message.assistant h2, .message.assistant h3 { margin: 15px 0 10px; }
+.message.assistant pre { background: rgba(0,0,0,0.05); padding: 10px; border-radius: 8px; overflow-x: auto; margin-top: 10px;}
+.message.assistant code { font-family: monospace; background: rgba(0,0,0,0.05); padding: 2px 4px; border-radius: 4px;}
+
+.chat-input-container {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 100px;
+}
+
+#chat-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 10px 20px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.chat-input-container .primary-btn {
+    width: auto;
+    border-radius: 100px;
+    padding: 12px 25px;
+}
+
+/* Loading Dots Animation */
+.loading-dots:after {
+    content: '.';
+    animation: dots 1.5s steps(5, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0);}
+    40% { color: var(--text-color); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0);}
+    60% { text-shadow: .25em 0 0 var(--text-color), .5em 0 0 rgba(0,0,0,0);}
+    80%, 100% { text-shadow: .25em 0 0 var(--text-color), .5em 0 0 var(--text-color);}
+}
+
+/* Scroll Animations */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 {
+    transition-delay: 0.2s;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUpFade {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes dropdown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+.animate-dropdown {
+    animation: dropdown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+    .options-panel {
+        flex: none;
+        width: 100%;
+        position: static;
+    }
+    .chat-area {
+        height: 60vh;
+    }
+}

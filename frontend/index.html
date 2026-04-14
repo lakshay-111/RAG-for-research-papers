@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArXiv RAG Researcher</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Marked for markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header class="animate-dropdown">
+        <div class="logo">ArXiv RAG Researcher</div>
+    </header>
+
+    <main class="container">
+        <!-- Sidebar / Options -->
+        <aside class="options-panel glass scroll-animate">
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('arxiv')">ArXiv Search</button>
+                <button class="tab" onclick="switchTab('upload')">Upload local</button>
+            </div>
+
+            <!-- ArXiv Tab Content -->
+            <div id="arxiv-tab" class="tab-content active">
+                <h3>Search Papers</h3>
+                <form id="arxiv-form">
+                    <div class="input-group">
+                        <label>Query</label>
+                        <input type="text" id="arxiv-query" placeholder="e.g. quantum computing" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Mode</label>
+                        <select id="arxiv-mode">
+                            <option value="relevance">Relevance</option>
+                            <option value="latest">Latest</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Number of Papers</label>
+                        <input type="number" id="arxiv-num" value="3" min="1" max="10" required>
+                    </div>
+                    <button type="submit" class="btn primary-btn">Search & Ingest</button>
+                </form>
+            </div>
+
+            <!-- Upload Tab Content -->
+            <div id="upload-tab" class="tab-content hidden">
+                <h3>Upload PDFs/Docs</h3>
+                <form id="upload-form">
+                    <div class="file-drop-area" id="file-drop-area">
+                        <span class="file-msg">Click here or drag files (PDF/DOCX)</span>
+                        <input type="file" id="local-files" multiple accept=".pdf,.docx" required>
+                    </div>
+                    <div id="file-list" class="file-list"></div>
+                    <button type="submit" class="btn primary-btn" style="margin-top: 15px;">Upload & Ingest</button>
+                </form>
+            </div>
+            
+            <div id="action-status" class="status-msg"></div>
+
+            <hr>
+
+            <!-- Chat Setup -->
+            <h3>Chat Setup</h3>
+            <div class="input-group">
+                <label>Target Collection</label>
+                <div style="display: flex; gap: 10px;">
+                    <select id="collection-select">
+                        <option value="">Loading...</option>
+                    </select>
+                    <button class="btn icon-btn" id="refresh-collections" title="Refresh">↻</button>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Chunks to Retrieve</label>
+                <input type="number" id="chat-chunks" value="3" min="1" max="10">
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <section class="chat-area scroll-animate delay-1">
+            <div class="chat-box" id="chat-box">
+                <div class="message system glass">
+                    Hello! Select a collection on the left and ask me questions about your processed documents.
+                </div>
+            </div>
+            
+            <form id="chat-form" class="chat-input-container glass">
+                <input type="text" id="chat-input" placeholder="Type your question..." autocomplete="off" required>
+                <button type="submit" class="btn primary-btn">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="/script.js"></script>
+</body>
+</html>

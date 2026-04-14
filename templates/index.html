@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArXiv RAG - Research Paper Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="background"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">📚 ArXiv RAG</h1>
+                <p class="subtitle">AI-Powered Research Paper Assistant</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Step 1: Search Papers -->
+            <section class="glass-panel" id="search-section">
+                <h2 class="section-title">📖 Step 1: Search Papers</h2>
+                
+                <div class="form-group">
+                    <label for="search-query">Search arXiv for papers:</label>
+                    <input 
+                        type="text" 
+                        id="search-query" 
+                        placeholder="e.g., blockchain voting, machine learning security..."
+                        class="input-field"
+                    >
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="search-mode">Search Mode:</label>
+                        <select id="search-mode" class="input-field">
+                            <option value="relevance">Relevance</option>
+                            <option value="latest">Latest</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="num-papers">Number of Papers:</label>
+                        <input 
+                            type="number" 
+                            id="num-papers" 
+                            value="3" 
+                            min="1" 
+                            max="10"
+                            class="input-field"
+                        >
+                    </div>
+                </div>
+
+                <button id="search-btn" class="btn btn-primary">🔍 Search & Load Papers</button>
+                <div id="status-search" class="status hidden"></div>
+            </section>
+
+            <!-- Step 2: Ask Questions -->
+            <section class="glass-panel" id="question-section">
+                <h2 class="section-title">❓ Step 2: Ask Questions</h2>
+                
+                <div id="collection-info" class="collection-info hidden">
+                    <p>✅ Papers loaded: <span id="collection-name"></span></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="question-query">Ask your question:</label>
+                    <textarea 
+                        id="question-query" 
+                        placeholder="Ask anything about the papers..."
+                        class="input-field textarea"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="num-chunks">Number of sources to retrieve:</label>
+                    <input 
+                        type="number" 
+                        id="num-chunks" 
+                        value="5" 
+                        min="1" 
+                        max="10"
+                        class="input-field"
+                    >
+                </div>
+
+                <button id="ask-btn" class="btn btn-primary" disabled>📤 Get Answer</button>
+                <div id="status-question" class="status hidden"></div>
+            </section>
+
+            <!-- Response Section -->
+            <section class="glass-panel hidden" id="response-section">
+                <h2 class="section-title">💡 Response</h2>
+                
+                <div id="answer-box" class="answer-box"></div>
+
+                <div id="sources-section" style="margin-top: 2rem;">
+                    <h3 class="subsection-title">📚 Sources Used:</h3>
+                    <div id="sources-list" class="sources-list"></div>
+                </div>
+
+                <button id="new-search-btn" class="btn btn-secondary" style="margin-top: 1rem;">🔄 New Search</button>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Built with ❤️ | RAG-powered research assistant</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
